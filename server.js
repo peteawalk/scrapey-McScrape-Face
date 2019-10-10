@@ -1,20 +1,19 @@
-var express = require("express");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 // Require all models
-var db = require("./models");
-
-var PORT = 3000;
+const db = require("./models");
+const PORT = 3000;
 
 // Initialize Express
-var app = express();
+const app = express();
 
 // Configure middleware
 
@@ -27,25 +26,27 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 
 // Routes
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("http://www.echojs.com/").then(function(response) {
+  axios.get("https://www.koreatimes.co.kr/www2/index.asp").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
+    console.log(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    // Now, we grab every a element within an article tag, and do the following:
+    $("f1-latest-listing--grid-item").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
+        .children("p")
         .text();
       result.link = $(this)
         .children("a")
