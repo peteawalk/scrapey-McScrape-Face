@@ -2,49 +2,50 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>News Scraping</title>
-    <style>
-      body { background-color: #F2F6D0 }
-      #wrapper {
-        width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
-      }
-      #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
-      }
-    </style>
+    <title>Politics Scraped</title>
+    <!-- styling below -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/style.css">
   </head>
+
   <body>
-    <div id="wrapper">
-      <h1>Article Scraper</h1>
-      <h2><i>Front Page Articles from the Korea Times</i></h2>
-      <p><i>If blank, navigate to /scrape</i></p>
-      <div id="articles"></div>
-      <div id="notes"></div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light col-md-12">
+          <a class="navbar-brand" href="#">🏛 Politcs Scraped</a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+      <div class="jumbotron text-center col-md-12">
+          <h1>🏛 Politics Scraped</h1>
+          <h3>/r/politics subreddit <i class="fa fa-reddit-alien" aria-hidden="true"></i></h3>
+          <p><i>Democracy Dies in Darkness</i></p>
+          <button class="btn btn-success"><a href="/scrape">Scrape New Articles</a></button>
+      </div>
+
+      <button id="myBtn"><a href="#top">Top</a></button>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Click on an article title to take notes!</h3>
+          <div id="articles"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="notes"></div>
+        </div>
+      </div>
     </div>
+
+    <!-- begin javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
   </body>
+
 </html>

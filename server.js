@@ -10,7 +10,7 @@ const cheerio = require("cheerio");
 
 // Require all models
 const db = require("./models");
-const PORT = 3000;
+var PORT = 3000 || process.env.PORT;
 
 // Initialize Express
 const app = express();
@@ -26,31 +26,30 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScrapingHomework";
+// mongoHeadlines name of DB on localhost.
 mongoose.connect(MONGODB_URI);
 
-// Routes
 
+// Routes
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.koreatimes.co.kr/www2/index.asp").then(function(response) {
+  axios.get("https://old.reddit.com/r/politics/").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
-    console.log(response.data);
 
     // Now, we grab every a element within an article tag, and do the following:
-    $("f1-latest-listing--grid-item").each(function(i, element) {
+    $("p.title").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("p")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
+      result.title = $(element).text().trim();
+      result.link = $(this).children("a").attr("href");
+
+      console.log(`Result title is: ${result.title}`);
+      console.log(`Result link is: ${result.link}`);
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
@@ -65,8 +64,8 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
-  });
+    res.redirect("/");
+  })
 });
 
 // Route for getting all Articles from the db

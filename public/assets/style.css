@@ -1,0 +1,81 @@
+body{ 
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.jumbotron {
+  font-family: serif;
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+h2, h3 {
+  font-family: 'Liu Jian Mao Cao', cursive;
+}
+
+button {
+  color: white;
+  border-radius: 5px;
+  background-color: seagreen;
+  margin-top: 5px;
+}
+
+#articles {
+  height: 700px;
+}
+
+#notes {
+  font-family: serif;
+}
+
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: #FCF5C7;
+}
+
+input {
+  height: 36px;
+  font-size: 24px;
+}
+
+textarea {
+  height: 200px;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: seagreen;
+}
+
+.footer {
+  padding: 1vh 0;
+  text-align: center;
+  background: #000;
+  color: #FFF;
+}
+
+#myBtn {
+  position: fixed;
+  bottom: 1rem;
+  float: right;
+  right: 18.5%;
+  left: 77.25%;
+  max-width: 30px;
+  border: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  background-color: seagreen;
+  padding: .5px;
+  color: white;
+  border-radius: 5px;
+
+}
