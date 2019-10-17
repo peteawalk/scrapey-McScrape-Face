@@ -48,14 +48,9 @@ app.get("/scrape", function(req, res) {
       result.title = $(element).text().trim();
       result.link = $(this).children("a").attr("href");
 
-      console.log(`Result title is: ${result.title}`);
-      console.log(`Result link is: ${result.link}`);
-
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
         })
         .catch(function(err) {
           // If an error occurred, log it
